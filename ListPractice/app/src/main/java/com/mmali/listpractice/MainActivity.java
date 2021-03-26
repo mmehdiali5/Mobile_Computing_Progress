@@ -2,6 +2,7 @@ package com.mmali.listpractice;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("You clicked",friendArrayList.get(position));
+                Intent intent =new Intent(MainActivity.this,MainActivity2.class);
+                intent.putExtra("Friend Name",friendArrayList.get(position));
+                startActivity(intent);
             }
         });
     }
