@@ -2,10 +2,15 @@ package com.mmali.sqllite;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
     public static final String CUSTOMER_NAME = "CustomerName";
@@ -30,7 +35,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean addCustomer(CustomerModel customerModel){
+    public boolean addCustomer(CustomerModel customerModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         //Hash map, as we did in bundles
         ContentValues cv = new ContentValues();
@@ -40,7 +45,33 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(ACTIVE_CUSTOMER, customerModel.isActive());
         //NullCoumnHack
         long insert = db.insert(CUST_TABLE, null, cv);
-        if (insert == -1) { return false; }
-        else{return true;}
+        if (insert == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public ArrayList<CustomerModel> getRecords() {
+        ArrayList<CustomerModel> myList = new ArrayList<>();
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor cursor = database.rawQuery("Select * FROM " +CUST_TABLE, new String[]{});
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        do {
+            CustomerModel customer = new CustomerModel(cursor.getString(1), cursor.getInt(2), cursor.getInt(3) == 1 ? true : false, cursor.getInt(0));
+            myList.add(customer);
+            //Toast.makeText(,"View Clicked", Toast.LENGTH_SHORT).show();
+        } while (cursor.moveToNext());
+        return myList;
+    }
+
+    public void removeItem(int id) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv=new ContentValues();
+        cv.put("id",id);
+        database.delete(CUST_TABLE,"CustomerID=?",new String[]{String.valueOf(id)});
     }
 }
+
