@@ -56,14 +56,14 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<CustomerModel> myList = new ArrayList<>();
         SQLiteDatabase database = this.getReadableDatabase();
         Cursor cursor = database.rawQuery("Select * FROM " +CUST_TABLE, new String[]{});
-        if (cursor != null) {
+        if (cursor != null && cursor.getCount()>0) {
             cursor.moveToFirst();
+            do {
+                CustomerModel customer = new CustomerModel(cursor.getString(1), cursor.getInt(2), cursor.getInt(3) == 1 ? true : false, cursor.getInt(0));
+                myList.add(customer);
+                //Toast.makeText(,"View Clicked", Toast.LENGTH_SHORT).show();
+            } while (cursor.moveToNext());
         }
-        do {
-            CustomerModel customer = new CustomerModel(cursor.getString(1), cursor.getInt(2), cursor.getInt(3) == 1 ? true : false, cursor.getInt(0));
-            myList.add(customer);
-            //Toast.makeText(,"View Clicked", Toast.LENGTH_SHORT).show();
-        } while (cursor.moveToNext());
         return myList;
     }
 
@@ -72,6 +72,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues cv=new ContentValues();
         cv.put("id",id);
         database.delete(CUST_TABLE,"CustomerID=?",new String[]{String.valueOf(id)});
+        database.close();
     }
 }
 

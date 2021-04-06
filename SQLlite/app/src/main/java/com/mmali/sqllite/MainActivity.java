@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         customers=db.getRecords();
         customersAdapter=new ArrayAdapter<CustomerModel>(MainActivity.this, android.R.layout.simple_list_item_1,customers);
         listViewCustomer.setAdapter(customersAdapter);
+
     }
 
 }
