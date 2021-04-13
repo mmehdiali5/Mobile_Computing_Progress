@@ -7,7 +7,6 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:id="@+id/mainLayout">
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +14,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -24,7 +22,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             >
-
             <ImageView
                 android:id="@+id/myImageView"
                 android:layout_width="100dp"
@@ -32,7 +29,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_launcher_background" />
-
             <TextView
                 android:id="@+id/myText1"
                 android:layout_width="wrap_content"
@@ -44,7 +40,6 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/myImageView"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/myText2"
                 android:layout_width="wrap_content"
