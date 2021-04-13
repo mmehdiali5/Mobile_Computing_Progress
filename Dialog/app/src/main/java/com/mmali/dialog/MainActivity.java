@@ -3,6 +3,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -22,7 +23,9 @@ public class MainActivity extends AppCompatActivity {
         builder.setMessage("It is message of my Dialog");
 
         builder.setCancelable(false);
-
+        LayoutInflater inflater=this.getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.my_dialog,null));
+        
         builder.setPositiveButton("Positive",
                 new DialogInterface.OnClickListener() {
                     @Override
